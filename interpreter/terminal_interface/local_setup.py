@@ -10,6 +10,7 @@ import inquirer
 import psutil
 import requests
 import wget
+from security import safe_command
 
 
 def local_setup(interpreter, provider=None, model=None):
@@ -428,8 +429,7 @@ def local_setup(interpreter, provider=None, model=None):
             if model_path:
                 try:
                     # Run the selected model and hide its output
-                    process = subprocess.Popen(
-                        f'"{model_path}" ' + " ".join(["--nobrowser", "-ngl", "9999"]),
+                    process = safe_command.run(subprocess.Popen, f'"{model_path}" ' + " ".join(["--nobrowser", "-ngl", "9999"]),
                         shell=True,
                         stdout=subprocess.PIPE,
                         stderr=subprocess.STDOUT,

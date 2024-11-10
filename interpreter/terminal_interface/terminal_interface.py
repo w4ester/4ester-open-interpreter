@@ -2,6 +2,7 @@
 The terminal interface is just a view. Just handles the very top layer.
 If you were to build a frontend this would be a way to do it.
 """
+from security import safe_command
 
 try:
     import readline
@@ -243,7 +244,7 @@ def terminal_interface(interpreter, message):
                                 tf.flush()
 
                             # Open the temporary file with the default editor
-                            subprocess.call([os.environ.get("EDITOR", "vim"), tf.name])
+                            safe_command.run(subprocess.call, [os.environ.get("EDITOR", "vim"), tf.name])
 
                             # Read the modified code
                             with open(tf.name, "r") as tf:
