@@ -15,6 +15,7 @@ import yaml
 
 from ..utils.oi_dir import oi_dir
 from .historical_profiles import historical_profiles
+from security import safe_requests
 
 profile_dir = os.path.join(oi_dir, "profiles")
 user_default_profile_path = os.path.join(profile_dir, "default.yaml")
@@ -76,7 +77,7 @@ def get_profile(filename_or_url, profile_path):
                 extensions = [".json", ".py", ".yaml"]
                 for ext in extensions:
                     try:
-                        response = requests.get(filename_or_url + ext)
+                        response = safe_requests.get(filename_or_url + ext)
                         response.raise_for_status()
                         filename_or_url += ext
                         break
@@ -108,7 +109,7 @@ def get_profile(filename_or_url, profile_path):
                 return yaml.safe_load(file)
 
     # Try URL
-    response = requests.get(filename_or_url)
+    response = safe_requests.get(filename_or_url)
     response.raise_for_status()
     if extension == ".py":
         return {"start_script": response.text, "version": OI_VERSION}

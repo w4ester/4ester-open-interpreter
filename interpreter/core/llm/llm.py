@@ -1,4 +1,5 @@
 import os
+from security import safe_requests
 
 os.environ["LITELLM_LOCAL_MODEL_COST_MAP"] = "True"
 import sys
@@ -350,7 +351,7 @@ Continuing...
             names = []
             try:
                 # List out all downloaded ollama models. Will fail if ollama isn't installed
-                response = requests.get(f"{api_base}/api/tags")
+                response = safe_requests.get(f"{api_base}/api/tags")
                 if response.ok:
                     data = response.json()
                     names = [
