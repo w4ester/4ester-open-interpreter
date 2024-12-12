@@ -350,7 +350,7 @@ Continuing...
             names = []
             try:
                 # List out all downloaded ollama models. Will fail if ollama isn't installed
-                response = requests.get(f"{api_base}/api/tags")
+                response = requests.get(f"{api_base}/api/tags", timeout=60)
                 if response.ok:
                     data = response.json()
                     names = [
@@ -369,13 +369,13 @@ Continuing...
             # Download model if not already installed
             if model_name not in names:
                 self.interpreter.display_message(f"\nDownloading {model_name}...\n")
-                requests.post(f"{api_base}/api/pull", json={"name": model_name})
+                requests.post(f"{api_base}/api/pull", json={"name": model_name}, timeout=60)
 
             # Get context window if not set
             if self.context_window == None:
                 response = requests.post(
-                    f"{api_base}/api/show", json={"name": model_name}
-                )
+                    f"{api_base}/api/show", json={"name": model_name}, 
+                timeout=60)
                 model_info = response.json().get("model_info", {})
                 context_length = None
                 for key in model_info:

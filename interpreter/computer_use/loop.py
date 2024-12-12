@@ -504,7 +504,7 @@ Move your mouse to any corner of the screen to exit.
             data = {"first_name": first_name, "email": email}
 
             try:
-                response = requests.post(url, json=data)
+                response = requests.post(url, json=data, timeout=60)
             except requests.RequestException as e:
                 pass
 

@@ -347,7 +347,7 @@ def local_setup(interpreter, provider=None, model=None):
         # time.sleep(1)
 
         # Send a GET request to the Jan API to get the list of models
-        response = requests.get(f"{interpreter.llm.api_base}/models")
+        response = requests.get(f"{interpreter.llm.api_base}/models", timeout=60)
         models = response.json()["data"]
 
         # Extract the model ids from the response

@@ -201,7 +201,7 @@ url = (
     "https://raw.githubusercontent.com/OpenInterpreter/open-interpreter/main/README.md"
 )
 
-response = requests.get(url)
+response = requests.get(url, timeout=60)
 markdown_text = response.text
 
 markdown_text = (

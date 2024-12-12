@@ -266,7 +266,7 @@ class Display:
                     response = requests.post(
                         f'{self.computer.api_base.strip("/")}/point/',
                         json={"query": description, "base64": screenshot_base64},
-                    )
+                    timeout=60)
                     return response.json()
                 except Exception as e:
                     raise Exception(
@@ -291,7 +291,7 @@ class Display:
                 response = requests.post(
                     f'{self.computer.api_base.strip("/")}/point/text/',
                     json={"query": text, "base64": screenshot_base64},
-                )
+                timeout=60)
                 response = response.json()
                 return response
             except:
@@ -323,7 +323,7 @@ class Display:
                 response = requests.post(
                     f'{self.computer.api_base.strip("/")}/text/',
                     json={"base64": screenshot_base64},
-                )
+                timeout=60)
                 response = response.json()
                 return response
             except:
