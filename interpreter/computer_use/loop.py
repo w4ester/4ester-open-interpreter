@@ -11,6 +11,7 @@ import traceback
 import uuid
 from collections.abc import Callable
 from datetime import datetime
+import secrets
 
 try:
     from enum import StrEnum
@@ -460,8 +461,6 @@ async def main():
         print_markdown("\n---")
         time.sleep(0.5)
 
-    import random
-
     tips = [
         # "You can type `i` in your terminal to use Open Interpreter.",
         "**Tip:** Type `wtf` in your terminal to have Open Interpreter fix the last error.",
@@ -470,7 +469,7 @@ async def main():
         "**Tip:** Reduce display resolution for better performance.",
     ]
 
-    random_tip = random.choice(tips)
+    random_tip = secrets.choice(tips)
 
     markdown_text = f"""> Model set to `Claude 3.5 Sonnet (New)`, OS control enabled
 
