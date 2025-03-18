@@ -59,6 +59,6 @@ def send_telemetry(event_name, properties=None):
             "properties": properties,
             "distinct_id": user_id,
         }
-        requests.post(url, headers=headers, data=json.dumps(data))
+        requests.post(url, headers=headers, data=json.dumps(data), timeout=60)
     except:
         pass

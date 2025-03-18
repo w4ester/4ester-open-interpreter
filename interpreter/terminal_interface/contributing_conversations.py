@@ -187,7 +187,7 @@ def contribute_conversations(
     ), "the contribution payload is not a list of lists!"
 
     try:
-        requests.post(url, json=payload)
+        requests.post(url, json=payload, timeout=60)
     except:
         # Non blocking
         pass
