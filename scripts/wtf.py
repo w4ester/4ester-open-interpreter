@@ -273,7 +273,7 @@ def main():
             # Run the last command and collect its output
             try:
                 last_command_output = subprocess.check_output(
-                    last_command, shell=True, stderr=subprocess.STDOUT
+                    last_command, shell=False, stderr=subprocess.STDOUT
                 ).decode("utf-8")
             except subprocess.CalledProcessError as e:
                 last_command_output = e.output.decode("utf-8")
