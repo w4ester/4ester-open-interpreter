@@ -2,12 +2,12 @@ import threading
 import time
 
 import html2text
-import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
+from security import safe_requests
 
 
 class Browser:
@@ -29,7 +29,7 @@ class Browser:
         """
         Searches the web for the specified query and returns the results.
         """
-        response = requests.get(
+        response = safe_requests.get(
             f'{self.computer.api_base.strip("/")}/browser/search',
             params={"query": query},
         )
@@ -45,7 +45,7 @@ class Browser:
             target=lambda: setattr(
                 threading.current_thread(),
                 "response",
-                requests.get(
+                safe_requests.get(
                     f'{self.computer.api_base.strip("/")}/browser/search',
                     params={"query": query},
                 ),
