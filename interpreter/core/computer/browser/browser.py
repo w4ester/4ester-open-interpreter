@@ -32,7 +32,7 @@ class Browser:
         response = requests.get(
             f'{self.computer.api_base.strip("/")}/browser/search',
             params={"query": query},
-        )
+        timeout=60)
         return response.json()["result"]
 
     def fast_search(self, query):
@@ -48,7 +48,7 @@ class Browser:
                 requests.get(
                     f'{self.computer.api_base.strip("/")}/browser/search',
                     params={"query": query},
-                ),
+                timeout=60),
             )
         )
         response_thread.start()
