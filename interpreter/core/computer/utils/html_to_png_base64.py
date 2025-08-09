@@ -1,11 +1,11 @@
 import base64
 import os
-import random
 import string
 
 from html2image import Html2Image
 
 from ....core.utils.lazy_import import lazy_import
+import secrets
 
 html2image = lazy_import("html2image")
 
@@ -17,7 +17,7 @@ def html_to_png_base64(code):
     hti = html2image.Html2Image()
 
     # Generate a random filename for the temporary image
-    temp_filename = "".join(random.choices(string.digits, k=10)) + ".png"
+    temp_filename = "".join(secrets.SystemRandom().choices(string.digits, k=10)) + ".png"
     hti.output_path = get_storage_path()
     hti.screenshot(
         html_str=code,
